@@ -1,74 +1,79 @@
-# pearOS Lock Chime Settings (非公式カスタマイズ)
+# pearOS Lock Chime Settings (Unofficial Customization)
 
-**これはpearOS公式のツールではありません。個人ユーザーによる非公式カスタマイズです。**
+*For Linux fans who are curious about macOS and want to enjoy pearOS, the "Mac-like OS."*
 
-## きっかけ
+**This is not an official pearOS tool. It's an unofficial customization made by an individual user.**
 
-本来のmacOSはApple Silicon搭載機の上蓋(ディスプレイ)を開けたときに「ジャーン」というチャイムが鳴りますが、これはMacチップ独自のハードウェア機能に依存しているため、pearOSをインストールした一般的なPCでは再現できません。
 
-その代わりとして、**画面ロックの解除(Lock Out)時にチャイムが鳴る**ように設定しました。さらに発展させて、**画面がロックされる(Lock In)ときにもチャイムが鳴る**ようにし、それぞれ好きな音・好きな音量を個別に設定できるようにしています。
+## Background
 
-## できること
+On real macOS machines with Apple Silicon, opening the lid plays a startup chime — but that depends on hardware only Apple chips have, so it can't happen on a regular PC running pearOS.
 
-- Lock In(画面ロック時)/ Lock Out(ロック解除時)、それぞれに好きなチャイム音を設定できる
-- 音量もLock In / Lock Outで個別に調整できる
-- 設定は専用アプリ(アプリランチャーから起動)で行える。GUIでサウンドを選んで、試聴して、保存するだけ
-- 好みのチャイムは自分でPython(NumPy/SciPy)を使って音を合成して作ることもできるし、どこかからダウンロードしてきた音源ファイル(wav/ogg/flac)を追加することもできる
+As a substitute, I set up a chime that plays when the screen **unlocks (Lock Out)**. I then extended it further so a chime also plays when the screen **locks (Lock In)**, with the sound and volume configurable independently for each.
 
-## インストール
+## Features
+
+- Choose any chime sound for Lock In (screen locks) and Lock Out (screen unlocks) independently
+- Set the volume independently for Lock In and Lock Out
+- Configured through a small standalone GUI app, launched from the App Launcher — pick a sound, preview it, adjust volume, save
+- Add your own chimes by generating them yourself with Python (NumPy/SciPy), or simply drop in any downloaded `.wav` / `.ogg` / `.flac` file
+
+## Installation
 
 ```bash
-git clone https://github.com/yourname/pearos-lock-chimes.git
+git clone https://github.com/machi-nao/pearos-lock-chimes.git
 cd pearos-lock-chimes
 chmod +x install.sh
 ./install.sh
 ```
 
-インストール後、watcherを起動します(次回ログイン時からは自動起動します)。
+Then start the watcher (it will also auto-start on future logins):
 
 ```bash
 python3 ~/lock-chime-watcher.py & disown
 ```
 
-## ファイル構成
+## File structure
 
-```
 pearos-lock-chimes/
-├── install.sh                    インストールスクリプト
-├── chime_settings.py             チャイム設定アプリ本体(PySide6)
-├── lock-chime-watcher.py         画面ロック/解除を監視して音を鳴らす常駐スクリプト
+├── install.sh Install script
+├── chime_settings.py Settings app (PySide6)
+├── lock-chime-watcher.py Background watcher that plays chimes on lock/unlock
 ├── icons/
-│   └── chime-settings-icon.svg   設定アプリのアイコン
+│ └── chime-settings-icon.svg App icon
 ├── desktop/
-│   └── pearos-chime-settings.desktop  アプリランチャー登録用
+│ └── pearos-chime-settings.desktop App Launcher entry
 ├── sounds/
-│   ├── lock-in/
-│   │   └── suzumushi.wav         鈴虫の音(デフォルトのLock In用)
-│   └── lock-out/
-│       └── fanfare.wav           オーケストラ風ファンファーレ(デフォルトのLock Out用)
+│ ├── lock-in/
+│ │ └── suzumushi.wav Japanese bell-cricket chirp (default Lock In sound)
+│ └── lock-out/
+│ └── fanfare.wav Orchestral-style fanfare (default Lock Out sound)
 └── scripts/
-    ├── make_suzumushi_lockin.py  鈴虫の音の生成スクリプト
-    └── make_fanfare_lockout.py   ファンファーレの生成スクリプト
-```
+├── make_suzumushi_lockin.py Generates the bell-cricket sound
+└── make_fanfare_lockout.py Generates the fanfare sound
 
-## 使い方
 
-1. アプリランチャーから「チャイム設定」を起動
-2. Lock In / Lock Outそれぞれのプルダウンから好きな音を選ぶ(試聴ボタンあり)
-3. 音量スライダーで音量を調整
-4. 「保存」を押せば、次回のロック/解除から反映される
+## Usage
 
-音源を自分で追加したい場合は、以下のフォルダに `.wav` / `.ogg` / `.flac` ファイルを置くだけで、アプリのプルダウンに自動的に反映されます。
+1. Open "Chime Settings" from the App Launcher
+2. Pick a sound for Lock In / Lock Out from the dropdowns (preview button included)
+3. Adjust volume with the sliders
+4. Click "Save" — it takes effect on the next lock/unlock
 
-```
+To add your own sounds, just drop `.wav` / `.ogg` / `.flac` files into these folders — they show up automatically in the app's dropdowns, no reinstall needed:
+
 ~/Music/pearos-chimes/lock-in/
 ~/Music/pearos-chimes/lock-out/
-```
 
-## クレジット
 
-このツールの設計・実装は [Claude AI](https://claude.ai) と一緒に作りました。
+## Credits
 
-## ライセンス
+Built together with [Claude AI](https://claude.ai).
 
-MIT License(LICENSEファイル参照)
+## License
+
+MIT License (see LICENSE file)
+
+---
+
+*Mulțumesc pearOS pentru un sistem de operare atât de distractiv de personalizat! 🍐*
