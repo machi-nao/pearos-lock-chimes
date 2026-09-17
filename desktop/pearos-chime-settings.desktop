@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=チャイム設定
+Name[en]=Chime Settings
+GenericName=ロック音の設定
+Comment=Lock In / Lock Out のチャイム音と音量を設定します
+Comment[en]=Configure Lock In / Lock Out chime sounds and volume
+Exec=python3 /home/liveuser/.local/share/pearos-chime-settings/chime_settings.py
+Icon=pearos-chime-settings
+Terminal=false
+Categories=Qt;Settings;
+StartupNotify=true
