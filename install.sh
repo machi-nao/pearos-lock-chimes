@@ -27,7 +27,7 @@ cp "$REPO_DIR/icons/chime-settings-icon.svg" ~/.local/share/icons/hicolor/scalab
 
 echo "=== アプリランチャー用の.desktopファイルを配置 ==="
 mkdir -p ~/.local/share/applications
-cp "$REPO_DIR/desktop/pearos-chime-settings.desktop" ~/.local/share/applications/
+sed "s|@HOME@|$HOME|g" "$REPO_DIR/desktop/pearos-chime-settings.desktop" > ~/.local/share/applications/pearos-chime-settings.desktop
 chmod +x ~/.local/share/applications/pearos-chime-settings.desktop
 
 echo "=== 常駐watcherを配置 ==="
@@ -56,3 +56,8 @@ echo "  python3 ~/lock-chime-watcher.py & disown"
 echo "(次回ログイン時からは自動で起動します)"
 echo ""
 echo "アプリランチャーから「チャイム設定」を開いて、好きな音・音量を選んでください。"
+
+if ! python3 -c "import PySide6" 2>/dev/null; then
+  echo ""
+  echo "※ 設定アプリには PySide6 が必要です:  sudo pacman -S pyside6"
+fi

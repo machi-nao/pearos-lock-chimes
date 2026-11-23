@@ -18,6 +18,11 @@ As a substitute, I set up a chime that plays when the screen **unlocks (Lock Out
 - Configured through a small standalone GUI app, launched from the App Launcher — pick a sound, preview it, adjust volume, save
 - Add your own chimes by generating them yourself with Python (NumPy/SciPy), or simply drop in any downloaded `.wav` / `.ogg` / `.flac` file
 
+## Requirements
+
+- pearOS NiceC0re (KDE Plasma 6)
+- PySide6 for the settings app: `sudo pacman -S pyside6`
+
 ## Installation
 
 ```bash
